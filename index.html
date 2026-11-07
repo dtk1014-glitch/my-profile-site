@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="스토어매니저 김현명의 프로필" />
+  <title>김현명 | 스토어매니저</title>
+
+  <!-- 페이지가 그려지기 전에 다크모드를 적용해 깜빡임을 막습니다 -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'dark' || (!saved && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // 색상과 그림자는 style.css의 CSS 변수(:root / html.dark)를 참조합니다.
+    // 색을 바꾸려면 style.css의 변수만 수정하면 라이트/다크 모두 반영됩니다.
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Noto Sans KR"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            paper: 'var(--paper)',
+            surface: 'var(--surface)',
+            'surface-alt': 'var(--surface-alt)',
+            ink: 'var(--ink)',
+            muted: 'var(--muted)',
+            line: 'var(--line)',
+            accent: 'var(--accent)',
+            'accent-hover': 'var(--accent-hover)',
+            'on-accent': 'var(--on-accent)',
+            thumb: 'var(--thumb)',
+          },
+          boxShadow: {
+            card: 'var(--shadow)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- 한글 웹폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- 커스텀 스타일 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-paper font-sans text-ink antialiased transition-colors duration-300">
+
+  <!-- ===== 헤더 / 네비게이션 ===== -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-line bg-surface shadow-sm transition-colors duration-300">
+    <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6" aria-label="주 메뉴">
+      <a href="#hero" class="text-xl font-black tracking-tight text-ink">김현명<span class="text-muted">.</span></a>
+
+      <!-- 데스크톱 메뉴 -->
+      <ul class="hidden items-center gap-8 md:flex">
+        <li><a href="#about" class="nav-link">소개</a></li>
+        <li><a href="#skills" class="nav-link">역량</a></li>
+        <li><a href="#projects" class="nav-link">주요 업무</a></li>
+        <li><a href="#contact" class="nav-link">연락처</a></li>
+      </ul>
+
+      <div class="flex items-center gap-1">
+        <!-- 다크모드 토글 -->
+        <button id="theme-toggle" type="button" aria-label="다크모드 전환"
+          class="rounded-full p-2 text-muted transition hover:bg-surface-alt hover:text-ink">
+          <svg class="hidden h-5 w-5 dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364-.707-.707M6.343 6.343l-.707-.707m12.728 0-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="h-5 w-5 dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <!-- 모바일 햄버거 버튼 -->
+        <button id="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu"
+          class="rounded-full p-2 text-muted transition hover:bg-surface-alt hover:text-ink md:hidden">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- 모바일 메뉴 -->
+    <div id="mobile-menu" class="hidden border-t border-line bg-surface md:hidden">
+      <ul class="flex flex-col px-4 py-3">
+        <li><a href="#about" class="block rounded-xl px-3 py-3 font-semibold text-ink hover:bg-surface-alt">소개</a></li>
+        <li><a href="#skills" class="block rounded-xl px-3 py-3 font-semibold text-ink hover:bg-surface-alt">역량</a></li>
+        <li><a href="#projects" class="block rounded-xl px-3 py-3 font-semibold text-ink hover:bg-surface-alt">주요 업무</a></li>
+        <li><a href="#contact" class="block rounded-xl px-3 py-3 font-semibold text-ink hover:bg-surface-alt">연락처</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section id="hero" class="mx-auto max-w-6xl px-4 pb-20 pt-32 sm:px-6 sm:pt-40">
+      <div class="grid items-center gap-12 md:grid-cols-[1.2fr_1fr]">
+        <div>
+          <p class="inline-flex items-center rounded-full bg-ink px-4 py-1.5 text-xs font-bold tracking-wide text-on-accent">
+            👋 반갑습니다
+          </p>
+          <h1 class="isolate mt-6 text-5xl font-black leading-[1.12] tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            안녕하세요,<br />
+            <span class="relative inline-block">김현명<span class="absolute inset-x-0 bottom-1 -z-10 h-3 bg-line"></span></span>입니다
+          </h1>
+          <p class="mt-6 text-sm font-bold uppercase tracking-[0.3em] text-muted">스토어매니저</p>
+          <p class="mt-3 max-w-xl text-lg leading-relaxed text-muted">
+            집념에사나이
+          </p>
+          <div class="mt-10 flex flex-wrap gap-4">
+            <a href="#projects" class="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-bold text-on-accent shadow-card transition hover:bg-accent-hover">
+              주요 업무 보기
+              <span class="transition group-hover:translate-x-1">→</span>
+            </a>
+            <a href="#contact" class="inline-flex items-center rounded-full border border-line bg-surface px-7 py-3.5 font-bold text-ink shadow-sm transition hover:border-ink">
+              연락하기
+            </a>
+          </div>
+        </div>
+
+        <!-- 프로필 카드 + 요약 타일 -->
+        <div class="grid gap-4">
+          <div class="relative flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-thumb shadow-card sm:h-80">
+            <span class="text-8xl font-black text-white sm:text-9xl">김</span>
+            <span class="absolute bottom-6 left-6 text-xs font-bold uppercase tracking-[0.25em] text-white/70">Store Manager</span>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-surface p-6 shadow-card">
+              <p class="text-4xl font-black text-ink">6</p>
+              <p class="mt-1 text-sm font-semibold text-muted">핵심 역량</p>
+            </div>
+            <div class="rounded-2xl bg-surface p-6 shadow-card">
+              <p class="text-4xl font-black text-ink">3</p>
+              <p class="mt-1 text-sm font-semibold text-muted">주요 업무 분야</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about" class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="fade-in grid gap-8 rounded-3xl bg-surface p-8 shadow-card sm:p-12 md:grid-cols-[1fr_2fr] md:gap-16">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-muted">About</p>
+          <h2 class="mt-3 text-4xl font-black tracking-tight">소개</h2>
+        </div>
+        <p class="text-lg leading-relaxed text-muted">
+          집념에사나이.
+          고객 응대부터 재고와 직원 관리까지, 매장의 모든 흐름을 꼼꼼하게 챙기는 스토어매니저입니다.
+          현장에서 배우고 사람과 함께 성장하는 매장을 만들고 싶습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills" class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="fade-in rounded-3xl bg-surface p-8 shadow-card sm:p-12">
+        <div class="flex items-end justify-between gap-4">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.25em] text-muted">Skills</p>
+            <h2 class="mt-3 text-4xl font-black tracking-tight">핵심 역량</h2>
+          </div>
+          <p class="hidden text-xs font-bold uppercase tracking-[0.25em] text-muted sm:block">Core Expertise</p>
+        </div>
+        <ul class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <li class="flex items-center gap-3 rounded-2xl bg-surface-alt px-5 py-4 font-bold text-ink"><span class="text-xs text-muted">01</span>매장 운영</li>
+          <li class="flex items-center gap-3 rounded-2xl bg-surface-alt px-5 py-4 font-bold text-ink"><span class="text-xs text-muted">02</span>고객 응대</li>
+          <li class="flex items-center gap-3 rounded-2xl bg-surface-alt px-5 py-4 font-bold text-ink"><span class="text-xs text-muted">03</span>재고 관리</li>
+          <li class="flex items-center gap-3 rounded-2xl bg-surface-alt px-5 py-4 font-bold text-ink"><span class="text-xs text-muted">04</span>매출 관리</li>
+          <li class="flex items-center gap-3 rounded-2xl bg-surface-alt px-5 py-4 font-bold text-ink"><span class="text-xs text-muted">05</span>직원 교육</li>
+          <li class="flex items-center gap-3 rounded-2xl bg-surface-alt px-5 py-4 font-bold text-ink"><span class="text-xs text-muted">06</span>진열(VMD)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== 주요 업무 (타임라인) ===== -->
+    <section id="projects" class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="fade-in flex items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-muted">Work</p>
+          <h2 class="mt-3 text-4xl font-black tracking-tight">주요 업무</h2>
+        </div>
+        <p class="hidden text-xs font-bold uppercase tracking-[0.25em] text-muted sm:block">Main Duties</p>
+      </div>
+      <!-- 카드는 script.js의 projects 배열로부터 자동 렌더링됩니다 -->
+      <ol id="projects-grid" class="relative mt-12 flex flex-col gap-6 before:absolute before:bottom-6 before:left-[6px] before:top-6 before:w-px before:bg-line"></ol>
+    </section>
+
+    <!-- ===== 최근 영상 ===== -->
+    <section id="video" class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <div class="fade-in flex items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-muted">Video</p>
+          <h2 class="mt-3 text-4xl font-black tracking-tight">최근 영상</h2>
+        </div>
+        <p class="hidden text-xs font-bold uppercase tracking-[0.25em] text-muted sm:block">Latest Episode</p>
+      </div>
+
+      <a href="https://youtu.be/0lsSZu_-QjY" target="_blank" rel="noopener noreferrer" class="fade-in group mt-12 grid overflow-hidden rounded-3xl bg-surface shadow-card transition duration-300 hover:-translate-y-1 md:grid-cols-[3fr_2fr]">
+        <div class="relative overflow-hidden">
+          <img src="images/video-thumb.png" alt="테토남 겨울 필수 아이템 영상 썸네일" loading="lazy"
+            class="aspect-video h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+          <span class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-lg transition group-hover:scale-110">
+            <svg class="ml-1 h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+          </span>
+        </div>
+        <div class="flex flex-col justify-center p-8 sm:p-10">
+          <p class="text-xs font-bold uppercase tracking-[0.25em] text-muted">Ep. 24</p>
+          <h3 class="mt-3 text-2xl font-black tracking-tight text-ink sm:text-3xl">테토남 겨울 필수 아이템</h3>
+          <p class="mt-4 leading-relaxed text-muted">남성복 브랜드 대표가 생각하는 겨울 필수 아이템을 소개합니다.</p>
+          <span class="mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-accent px-6 py-3 font-bold text-on-accent transition group-hover:bg-accent-hover">
+            영상 보기 <span class="transition group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </a>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="mx-auto max-w-6xl px-4 pb-24 pt-16 sm:px-6">
+      <div class="fade-in rounded-3xl bg-ink p-10 text-paper shadow-card sm:p-14">
+        <p class="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.25em]">
+          <span class="h-px w-8 bg-muted"></span>
+          Contact
+        </p>
+        <h2 class="mt-4 text-4xl font-black tracking-tight sm:text-5xl">함께 이야기 나눠요</h2>
+        <p class="mt-4 max-w-xl leading-relaxed">
+          문의 사항이 있으시면 편하게 전화 주세요.
+        </p>
+        <p class="mt-10 text-3xl font-black tracking-wide sm:text-4xl">010-4605-0733</p>
+        <a href="tel:01046050733" class="mt-8 inline-flex rounded-full bg-paper px-8 py-3.5 font-bold text-ink transition hover:opacity-90">
+          전화 걸기 →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="border-t border-line py-8 text-center text-sm text-muted">
+    © 2026 김현명. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

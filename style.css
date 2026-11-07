@@ -1,0 +1,102 @@
+/* ===== 색상 · 그림자 토큰 (라이트 / 다크) =====
+   사이트 전체 색상과 그림자는 여기서만 바꾸면 됩니다.
+   참고 디자인: 흑백 모노크롬 + 흰 카드 + 부드러운 그림자 */
+:root {
+  --paper: #f2f2f0;        /* 페이지 배경 */
+  --surface: #ffffff;      /* 카드 배경 */
+  --surface-alt: #f5f5f3;  /* 칩/타일 배경 */
+  --ink: #0f0f0f;          /* 본문/제목 */
+  --muted: #737373;        /* 보조 텍스트 */
+  --line: #e4e4e0;         /* 구분선 */
+  --accent: #0f0f0f;       /* 버튼 배경 */
+  --accent-hover: #333333;
+  --on-accent: #ffffff;    /* 버튼 글자 */
+  --thumb: #111111;        /* 썸네일 블록 */
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px -8px rgba(0, 0, 0, 0.12);
+}
+
+html.dark {
+  --paper: #0b0b0b;
+  --surface: #161616;
+  --surface-alt: #1e1e1e;
+  --ink: #f5f5f5;
+  --muted: #8a8a8a;
+  --line: #2a2a2a;
+  --accent: #f5f5f5;
+  --accent-hover: #d4d4d4;
+  --on-accent: #0b0b0b;
+  --thumb: #262626;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== 기본 ===== */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* 고정 헤더에 섹션 제목이 가려지지 않도록 여백 */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* ===== 내비게이션 링크 (현재 섹션 강조) ===== */
+.nav-link {
+  position: relative;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--ink);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--ink);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  width: 100%;
+}
+
+/* ===== 스크롤 시 나타나는 애니메이션 ===== */
+/* translate 속성을 사용해 Tailwind의 hover 변형(transform)과 충돌하지 않게 합니다 */
+.fade-in {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity 0.7s ease, translate 0.7s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ===== 동작 줄이기 설정 사용자 배려 ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .fade-in {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
